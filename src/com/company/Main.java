@@ -30,7 +30,7 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner input = new Scanner(System.in);
-        int count = 0;
+        int count =0;
         String board[][] = new String[3][3];
         System.out.println("Welcome to tic-tac-toe...do you want to be X or O");
         String ans = input.next();
