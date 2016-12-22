@@ -26,9 +26,11 @@ public class Main {
         }
     }
 
+
     public static void main(String[] args) {
-        // write your code here
+
         Scanner input = new Scanner(System.in);
+        int count = 0;
         String board[][] = new String[3][3];
         System.out.println("Welcome to tic-tac-toe...do you want to be X or O");
         String ans = input.next();
@@ -46,57 +48,78 @@ public class Main {
                     board[2][2] = "2,2";
                 }
             }
-        }
-        printBoard(board);
-        System.out.println("Enter the first number of the order pair you want to move in");
-        int pos = input.nextInt();
-        System.out.println("Enter the second number of the order pair you want to move in");
-        int pos2 = input.nextInt();
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                if (pos == i && pos2 == j) {
-                    board[i][j] = "X";
-                    printBoard(board);
+            printBoard(board);
+            for (int q = 0; q < 8; q++) {
+                System.out.println("Enter the first number of the order pair you want to move in");
+                int pos = input.nextInt();
+                System.out.println("Enter the second number of the order pair you want to move in");
+                int pos2 = input.nextInt();
+                if (!placement(board, pos, pos2)) {
+                    System.out.println("INVALID MOVE, Please pick again");
+                    System.out.println("Enter the first number of the order pair you want to move in");
+                    pos = input.nextInt();
+                    System.out.println("Enter the second number of the order pair you want to move in");
+                    pos2 = input.nextInt();
+                    for (int i = 0; i < 8; i++) {
+                        for (int j = 0; j < 8; j++) {
+                            if (pos == i && pos2 == j) {
+                                board[i][j] = "X";
+                                printBoard(board);
+                                count++;
+                            }
+                        }
+                    }
+                    System.out.println();
                 }
-            }
-        }
-        System.out.println();
-        System.out.println("Computer's first number");
-        Random ran = new Random();
-        int x = ran.nextInt(2);
-        System.out.println(x);
-        System.out.println("Computer's second number");
-        int y = ran.nextInt(2) + 1;
-        while (y == x) {
-            y = ran.nextInt(2) + 1;
-        }
-        System.out.println(y);
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                if (x == i && y == j) {
-                    board[i][j] = "O";
-                    printBoard(board);
+                for (int i = 0; i < 8; i++) {
+                    for (int j = 0; j < 8; j++) {
+                        if (pos == i && pos2 == j) {
+                            board[i][j] = "X";
+                            printBoard(board);
+                            count++;
+                        }
+                    }
+                }
+                System.out.println();
+                Random ran = new Random();
+                int x = ran.nextInt(3);
+                //System.out.println("Computer's first number " + x);
+                int y = ran.nextInt(3);
+                //System.out.println("Computer's second number " + y);
+                if (!placement(board, x, y)) {
+                    x = ran.nextInt(3);
+                    //  System.out.println("Computer's first number " + x);
+                    y = ran.nextInt(3);
+                    //System.out.println("Computer's second number " + y);
+                    for (int i = 0; i < 8; i++) {
+                        for (int j = 0; j < 8; j++) {
+                            if (x == i && y == j) {
+                                board[i][j] = "O";
+                                printBoard(board);
+                                count++;
+                                System.out.println("Computer moved into position (" + x + "," + y + ")");
+                            }
+                        }
+                    }
+                    System.out.println();
+                }
+                for (int i = 0; i < 8; i++) {
+                    for (int j = 0; j < 8; j++) {
+                        if (x == i && y == j) {
+                            board[i][j] = "O";
+                            printBoard(board);
+                            System.out.println("Computer moved into position (" + x + "," + y + ")");
 
+
+                        }
+                    }
                 }
             }
-        }
-        System.out.println();
-        System.out.println("Player's turn:");
-        System.out.println("Enter the first number of the order pair you want to move in");
-         pos = input.nextInt();
-        System.out.println("Enter the second number of the order pair you want to move in");
-         pos2 = input.nextInt();
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                if (pos == i && pos2 == j) {
-                    board[i][j] = "X";
-                    printBoard(board);
-                }
-            }
+        } else if (ans.equalsIgnoreCase("O")) {
+            System.out.println("Please be patient as this program is still under construction");
         }
 
 
     }
-
 }
 
